@@ -10,7 +10,7 @@ const fileroute = require("./routes/fileRoutes");
 const indexroutes = require("./routes/index");
 
 const app = express();
-const port = 3000;
+const port =process.env.PORT || 3000;
 
 // Connect to MongoDB
 connectDB();
