@@ -1,0 +1,18 @@
+*{
+    background: rgb(32, 32, 32);
+    color: white;
+    font-family: poppins;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+
+#preview {
+    margin-top: 20px;
+}
+a{
+    margin: 25px;
+}

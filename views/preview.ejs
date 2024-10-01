@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview File</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+    <h1>Preview File</h1>
+    <% if (file) { %>
+        <h2>File Details:</h2>
+        <p>Name: <%= file.originalname %></p>
+        <p>Type: <%= file.mimetype %></p>
+        <p>Size: <%= file.size %> bytes</p>
+        
+        <% if (file.mimetype.startsWith('image/')) { %>
+            <h3>Image Preview:</h3>
+            <img src="data:<%= file.mimetype %>;base64,<%= file.buffer.toString('base64') %>" alt="Image Preview" />
+        <% } else if (file.mimetype.startsWith('audio/')) { %>
+            <h3>Audio Preview:</h3>
+            <audio controls>
+                <source src="data:<%= file.mimetype %>;base64,<%= file.buffer.toString('base64') %>" type="<%= file.mimetype %>">
+                Your browser does not support the audio tag.
+            </audio>
+        <% } else if (file.mimetype.startsWith('video/')) { %>
+            <h3>Video Preview:</h3>
+            <video width="400" controls>
+                <source src="data:<%= file.mimetype %>;base64,<%= file.buffer.toString('base64') %>" type="<%= file.mimetype %>">
+                Your browser does not support the video tag.
+            </video>
+        <% } else if (file.mimetype === 'application/pdf') { %>
+            <h3>PDF Preview:</h3>
+            <iframe src="data:<%= file.mimetype %>;base64,<%= file.buffer.toString('base64') %>" width="600" height="400"></iframe>
+        <% } else { %>
+            <p>Preview not available for this file type.</p>
+        <% } %>
+    <% } %>
+    <a href="/files/upload">Upload Another File</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>
